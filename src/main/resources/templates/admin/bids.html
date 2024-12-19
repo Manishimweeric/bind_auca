@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Manage Bids</title>
+  <style>
+    body {
+      display: flex;
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f9;
+      margin: 0;
+    }
+    .sidebar {
+      width: 200px;
+      background-color: #2e3b4e;
+      padding: 20px;
+      height: 100vh;
+      color: #fff;
+      position: fixed;
+      top: 0;
+      left: 0;
+      overflow-y: auto;
+    }
+    .sidebar h2 {
+      color: #fff;
+      margin-top: 0;
+      font-size: 20px;
+    }
+    .sidebar a {
+      display: block;
+      color: #c1c8e4;
+      padding: 8px;
+      text-decoration: none;
+      font-size: 14px;
+    }
+    .sidebar a:hover {
+      background-color: #415a77;
+      color: white;
+    }
+    .content {
+      margin-left: 220px;
+      padding: 20px;
+      width: calc(100% - 220px);
+    }
+    h1 {
+      color: #2e3b4e;
+      font-size: 24px;
+      margin-bottom: 15px;
+      margin-left: 300px;
+    }
+    form, table {
+      width: 100%;
+      margin-top: 15px;
+    }
+    label {
+      font-weight: bold;
+      margin-right: 5px;
+      margin-left: 250px;
+    }
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      background-color: #fff;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      margin-top: 10px;
+    }
+    th, td {
+      padding: 10px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+    th {
+      background-color: #017eca;
+      color: #fff;
+    }
+    select {
+      padding: 6px;
+      font-size: 14px;
+    }
+    /* Button styles */
+    .approve-button {
+      background-color: #28a745; /* Green for Approve */
+      color: #fff;
+      border: none;
+      padding: 8px 12px;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+    .approve-button:hover {
+      background-color: #218838;
+    }
+    .deny-button {
+      background-color: #dc3545; /* Red for Deny */
+      color: #fff;
+      border: none;
+      padding: 8px 12px;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+    .deny-button:hover {
+      background-color: #c82333;
+    }
+    button:disabled {
+      background-color: #ccc;
+      cursor: not-allowed;
+    }
+  </style>
+</head>
+<body>
+<div class="sidebar">
+  <h2>Admin Dashboard</h2>
+  <a href="/admin/dashboard">Dashboard</a>
+  <a href="/admin/items">Manage Items</a>
+  <a href="/admin/bids">Manage Bids</a>
+</div>
+
+<div class="content">
+  <h1>Bids List</h1>
+  <form th:action="@{/admin/bids}" method="get">
+    <label for="status">Filter by Status:</label>
+    <select name="status" id="status" onchange="this.form.submit()">
+      <option value="" th:selected="${selectedStatus == null}">All</option>
+      <option value="Approved" th:selected="${selectedStatus == 'Approved'}">Approved</option>
+      <option value="Denied" th:selected="${selectedStatus == 'Denied'}">Denied</option>
+      <option value="Pending" th:selected="${selectedStatus == 'Pending'}">Pending</option>
+    </select>
+  </form>
+
+  <table>
+    <thead>
+    <tr>
+      <th>Bid ID</th>
+      <th>Item ID</th>
+      <th>Bidder ID</th>
+      <th>Bid Amount</th>
+      <th>Status</th>
+      <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="bid : ${bids}">
+      <td th:text="${bid.id}"></td>
+      <td th:text="${bid.itemId}"></td>
+      <td th:text="${bid.bidderId}"></td>
+      <td th:text="${bid.bidAmount}"></td>
+      <td th:text="${bid.status}"></td>
+      <td>
+        <form th:action="@{'/admin/bids/approve/' + ${bid.id}}" method="post" style="display:inline">
+          <button type="submit" th:disabled="${bid.status == 'Approved'}" class="approve-button">Approve</button>
+        </form>
+        <form th:action="@{'/admin/bids/deny/' + ${bid.id}}" method="post" style="display:inline">
+          <button type="submit" th:disabled="${bid.status == 'Denied'}" class="deny-button">Deny</button>
+        </form>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+</body>
+</html>

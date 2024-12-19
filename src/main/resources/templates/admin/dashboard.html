@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Admin Dashboard</title>
+  <style>
+    body {
+      display: flex;
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f9;
+      margin: 0;
+    }
+    /* Sidebar styles */
+    .sidebar {
+      width: 200px;
+      background-color: #2e3b4e;
+      padding: 20px;
+      height: 100vh;
+      color: #fff;
+      position: fixed;
+      top: 0;
+      left: 0;
+      overflow-y: auto;
+    }
+    .sidebar h2 {
+      color: #fff;
+      font-size: 22px;
+      margin-top: 0;
+    }
+    .sidebar a {
+      display: block;
+      color: #c1c8e4;
+      padding: 8px;
+      text-decoration: none;
+      font-size: 14px;
+    }
+    .sidebar a:hover {
+      background-color: #415a77;
+      color: white;
+    }
+    /* Main content styles */
+    .main-content {
+      margin-left: 220px; /* Space for the sidebar */
+      padding: 20px;
+      width: calc(100% - 220px); /* Adjust width to avoid overlap */
+      background-color: white;
+      overflow-y: auto;
+    }
+    h1 {
+      color: #2e3b4e;
+      font-size: 24px;
+      margin-bottom: 15px;
+    }
+    p {
+      color: #333;
+      font-size: 16px;
+    }
+    /* Responsive styles */
+    @media (max-width: 768px) {
+      .sidebar {
+        width: 200px; /* Adjust sidebar width */
+      }
+      .main-content {
+        padding: 15px; /* Adjust padding */
+        width: calc(100% - 200px); /* Adjust width for sidebar */
+        margin-left: 200px;
+      }
+    }
+    @media (max-width: 450px) {
+      .sidebar {
+        width: 100%; /* Full-width sidebar on small screens */
+        height: auto;
+        position: relative;
+      }
+      .main-content {
+        width: 100%;
+        margin-left: 0;
+        margin-top: 10px; /* Space for the sidebar */
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="sidebar">
+  <h2>Admin Dashboard</h2>
+  <a th:href="@{/admin/dashboard}">Dashboard</a>
+  <a th:href="@{/admin/items}">Manage Items</a>
+  <a th:href="@{/admin/bids}">Manage Bids</a>
+</div>
+
+<div class="main-content">
+  <h1>Welcome to the Admin Dashboard</h1>
+  <p>This is where you can manage your auction items and bids.</p>
+  <!-- Add your dashboard content here -->
+</div>
+</body>
+</html>

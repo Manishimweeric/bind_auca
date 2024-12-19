@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Item Details</title>
+    <link rel="stylesheet" href="/css/shared.css">
+</head>
+<body>
+<header>
+    <h1>Item Details</h1>
+</header>
+<div class="container">
+    <h2>Item 1</h2>
+    <img src="/images/item1.jpg" alt="Item 1" width="100%">
+    <p>Starting Price: $100</p>
+    <form action="/bidders/item/1/bid" method="post">
+        <label for="bidAmount">Enter Bid Amount:</label>
+        <input type="number" id="bidAmount" name="bidAmount" required>
+        <button type="submit" class="btn">Place Bid</button>
+    </form>
+</div>
+</body>
+</html>

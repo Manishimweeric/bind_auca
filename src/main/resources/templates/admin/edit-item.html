@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Edit Item</title>
+</head>
+<body>
+<h1>Edit Item</h1>
+<form th:action="@{'/admin/items/update/' + ${item.id}}" th:object="${item}" method="post" enctype="multipart/form-data">
+  <label>Item Name:</label>
+  <input type="text" th:field="*{name}" required/><br>
+
+  <label>Price:</label>
+  <input type="number" th:field="*{price}" step="0.01" required/><br>
+
+  <label>Photo:</label>
+  <input type="file" name="image"/><br>
+  <small>Leave blank if you do not want to update the image.</small><br>
+
+  <button type="submit">Update Item</button>
+</form>
+</body>
+</html>

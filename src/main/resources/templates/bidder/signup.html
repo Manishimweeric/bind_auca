@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Bidder Signup</title>
+  <style>
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f0f0f0;
+        margin: 0;
+        display: flex;
+        justify-content: center; /* Center the form horizontally */
+        align-items: center; /* Center the form vertically */
+        height: 100vh; /* Full viewport height */
+    }
+
+    h1 {
+        color: #333;
+        margin-bottom: 20px;
+    }
+
+    form {
+        background-color: white;
+        padding: 30px;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        width: 300px; /* Fixed width for the form */
+    }
+
+    label {
+        display: block;
+        margin-bottom: 5px;
+        color: #555;
+    }
+
+    input[type="text"],
+    input[type="password"] {
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 16px;
+        width: 100%; /* Full width */
+    }
+
+    input[type="text"]:focus,
+    input[type="password"]:focus {
+        border-color: #007bff;
+        outline: none;
+    }
+
+    button {
+        padding: 10px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+        width: 100%; /* Full width */
+    }
+
+    button:hover {
+        background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+<div>
+  <h1>Bidder Signup</h1>
+  <form th:action="@{/bidder/signup}" th:object="${bidder}" method="post">
+    <label>Name:</label>
+    <input type="text" th:field="*{name}" required/>
+
+    <label>Phone:</label>
+    <input type="text" th:field="*{phone}" required/>
+
+    <label>Password:</label>
+    <input type="password" th:field="*{password}" required/>
+
+    <button type="submit">Signup</button>
+  </form>
+</div>
+</body>
+</html>

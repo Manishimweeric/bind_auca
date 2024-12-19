@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Available Items</title>
+  <style>
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f0f0f0;
+        margin: 0;
+        display: flex;
+    }
+
+    .sidebar {
+        width: 200px;
+        background-color: #007bff;
+        color: white;
+        height: 100vh;
+        padding: 20px;
+        position: fixed;
+    }
+
+    .sidebar h2 {
+        margin-top: 0;
+        font-size: 20px;
+    }
+
+    .sidebar a {
+        color: white;
+        text-decoration: none;
+        display: block;
+        padding: 10px;
+        border-radius: 4px;
+        transition: background 0.3s;
+    }
+
+    .sidebar a:hover {
+        background-color: #0056b3;
+    }
+
+    .content {
+        margin-left: 220px; /* Space for sidebar */
+        padding: 20px;
+        width: calc(100% - 220px);
+    }
+
+    h1 {
+        color: #333;
+        margin-left: 290px;
+    }
+
+    form {
+        margin-bottom: 20px;
+    }
+
+    input[type="text"] {
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 16px;
+        margin-left: 290px;
+        width: 200px; /* Full width accounting for padding */
+    }
+
+    button {
+        padding: 10px;
+        background-color: #007bff;
+        color: white;
+        margin-top: 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+
+    button:hover {
+        background-color: #0056b3;
+    }
+
+    table {
+        width: 90%;
+        border-collapse: collapse;
+        margin-top: 20px;
+        margin-left: 30px;
+    }
+
+    th, td {
+        padding: 12px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+
+    th {
+        background-color: #007bff;
+        color: white;
+    }
+
+    tr:hover {
+        background-color: #f1f1f1;
+    }
+  </style>
+</head>
+<body>
+<div class="sidebar">
+  <h2>Bidder Dash</h2>
+  <a href="/bidder/items">Items</a>
+  <a href="/bidder/notifications">Notifications</a>
+  <!-- Add more links as needed -->
+</div>
+
+<div class="content">
+  <h1>Available Items</h1>
+  <form th:action="@{/bidder/items}" method="get">
+    <input type="text" name="search" placeholder="Search items"/>
+    <button type="submit">Search</button>
+  </form>
+
+  <table>
+    <thead>
+    <tr>
+      <th>Name</th>
+      <th>Price</th>
+      <th>Photo</th>
+      <th>Bid Amount</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="item : ${items}">
+      <td th:text="${item.name}"></td>
+      <td th:text="${item.price}"></td>
+      <td><a th:href="@{'/bidder/download/' + ${item.id}}">Download Image</a></td>
+      <td>
+        <form th:action="@{'/bidder/bid/' + ${item.id}}" method="post">
+          <input type="number" name="bidAmount" step="0.01" required/>
+          <button type="submit">Place Bid</button>
+        </form>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+</body>
+</html>

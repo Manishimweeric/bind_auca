@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Notifications</title>
+  <style>
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f0f0f0;
+        margin: 0;
+        display: flex;
+    }
+
+    .sidebar {
+        width: 200px;
+        background-color: #007bff;
+        color: white;
+        height: 100vh;
+        padding: 20px;
+        position: fixed;
+    }
+
+    .sidebar h2 {
+        margin-top: 0;
+        font-size: 20px;
+    }
+
+    .sidebar a {
+        color: white;
+        text-decoration: none;
+        display: block;
+        padding: 10px;
+        border-radius: 4px;
+        transition: background 0.3s;
+    }
+
+    .sidebar a:hover {
+        background-color: #0056b3;
+    }
+
+    .content {
+        margin-left: 220px; /* Space for sidebar */
+        padding: 20px;
+        width: calc(100% - 220px);
+    }
+
+    h1 {
+        color: #333;
+        margin-left: 290px;
+    }
+
+    ul {
+        list-style-type: none;
+        padding: 0;
+    }
+
+    li {
+        background-color: #ffffff;
+        margin-bottom: 10px;
+        padding: 15px;
+        border-radius: 4px;
+        width: 740px;
+        margin-left: 30px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    li:hover {
+        background-color: #f1f1f1;
+    }
+  </style>
+</head>
+<body>
+<div class="sidebar">
+  <h2>Navigation</h2>
+  <a href="/bidder/items">Items</a>
+  <a href="/bidder/notifications">Notifications</a>
+  <!-- Add more links as needed -->
+</div>
+
+<div class="content">
+  <h1>Notifications</h1>
+  <ul>
+    <li th:each="notification : ${notifications}" th:text="${notification}"></li>
+  </ul>
+</div>
+</body>
+</html>
