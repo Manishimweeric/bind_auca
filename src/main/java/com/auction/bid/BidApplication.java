@@ -12,9 +12,5 @@ public class BidApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(BidApplication.class, args);
 	}
-	@Bean
-	public WebServerFactoryCustomizer<ConfigurableServletWebServerFactory> webServerFactoryCustomizer() {
-		return factory -> factory.setPort(8081);
-	}
 
 }
